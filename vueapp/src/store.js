@@ -57,7 +57,7 @@ const storeEcommerce = {
 	},	
 	getProductById: (state) => (id) => {
 		return state.products.filter(
-		product => product.id == id);
+		product => product.id == id)[0];
 	},	
 	getProductsByCategoryId: (state) => (cat_id) => {
 		return state.products.filter(

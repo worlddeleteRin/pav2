@@ -4,10 +4,15 @@ from django.http import JsonResponse
 # import products models 
 from products.models import * 
 
+# serializers
+from .api_serializers import *
+
+
 # Create your views here.
 
 def get_products(request):	
-	products = list(Item.objects.all().values())	
+	raw_products = Item.objects.all()
+	products = serialize_products(raw_products)	
 	return JsonResponse({
 		'status': 1,
 		'products': products,
