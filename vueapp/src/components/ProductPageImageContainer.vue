@@ -2,8 +2,8 @@
 width is {{ this.width }}
 thumb direction is {{ this.getThumbDirection() }}
 
-<div class="relative lg:w-6/12 width-full max_h_desc product_page_images_wrapper">
-<div class="relative product_page_images max_h_desc">
+<div class="relative lg:w-6/12 width-full product_page_images_wrapper">
+<div class="relative product_page_images">
 
 
   <swiper
@@ -14,12 +14,16 @@ thumb direction is {{ this.getThumbDirection() }}
   :freeMode="true"
   :watchSlidesVisibility="true"
   :watchSlidesProgress="true"
+  :centeredSlides="true"
   class="mySwiper">
+	
 	<swiper-slide
-	v-for="image in 30"
-	:key="image"
+	v-for="image in product.images"
+	:key="image.id"
 	>
-		<img :src="this.api_url + this.product.images[0].imgsrc" />
+		<img 
+		class=""
+		:src="this.api_url + image.imgsrc" />
 
 	</swiper-slide>
 
@@ -28,19 +32,21 @@ thumb direction is {{ this.getThumbDirection() }}
 
 
   <swiper 
+  class="mySwiper2"
   @swiper="setMainImageSwiper"
   :style="{'--swiper-navigation-color': '#fff','--swiper-pagination-color': '#fff'}" 
   :slidesPerView="1"
   :spaceBetween="10" 
   :pagination="true"
+  :loop="true"
   :thumbs="{ swiper: thumbsSwiper }" 
-  class="mySwiper2 max_h_desc">
+  >
 		<swiper-slide
 	v-for="image in product.images"
 	:key="image.id"
 	>
 		<img 
-		class=""
+		class="object-contain max-w-full max-h-full mx-auto"
 		:src="this.api_url + image.imgsrc" />
 		</swiper-slide>
 	
@@ -76,6 +82,7 @@ import 'swiper/swiper.scss';
 import "swiper/components/navigation/navigation.min.css"
 import "swiper/components/thumbs/thumbs.min.css"
 import "swiper/components/pagination/pagination.min.css"
+
 
 
 
@@ -156,52 +163,56 @@ export default {
 }
 
 .swiper-slide {
-  background-size: cover;
   background-position: center;
 }
 .product_page_images_wrapper {
 }
 .product_page_images {
-	border: 5px solid brown;
-	height: max-content;
+	border: 5px solid red;
+	height: 100%;
 	display: flex;
+	align-items: center;
+	max-height: 650px;
 	position: relative;
-	top: 0;
-	left: 0;
 	width: 100%;
 }
 
 
 .mySwiper2 {
   position: relative;
-  width: 90%;
+  width: 100%;
   margin-left: 10px;
-  border: 3px solid orange;
-  height: 100%;
+  height: max-content;
+  max-height: 100%;
+  max-width: 100%;
 }
 .mySwiper2 .swiper-slide {
-	border: 5px solid violet;
-	display: flex;
+	border: 2px solid black;
 	justify-content: center;
-	height: max-content;	
+	height: max-content;
+	max-height: 100%;	
 	margin: auto;
-	border: 4px solid yellow;
 	img {
+		width: 100%;
+		height: 100%;
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
 	}
 }
 
 .mySwiper {
   width: 10%;
   height: 100%;
-  max-height: 80%;
+  max-height: 100%;
   padding: 10px 0;
   margin: auto;
-  border: 2px solid red;
   text-align: center;
 }
 
 .mySwiper .swiper-slide {
   width: 100%;
+  display: flex;
   max-height: 56px;
   max-width: 56px;
   padding: 2px;
@@ -217,14 +228,10 @@ export default {
   border: 2px solid blue;
 }
 
-.swiper-slide img {
-  display: block;
-  width: 100%;
-  object-fit: contain;
-}
 
 @media (max-width: 1024px) {
 	.product_page_images {
+		max-height: 500px;
 		height: max-content;
 		flex-direction: column-reverse;
 	}
@@ -233,8 +240,10 @@ export default {
 		max-height: 80px;
 	}
 	.mySwiper2 {
+		max-width: 100%;
 		width: 100%;
 		height: max-content;
+		max-height: 100%;
 		margin-left: 0px;
 	}
 }

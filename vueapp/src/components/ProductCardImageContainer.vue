@@ -1,25 +1,27 @@
 <template>
 	
 	<div
-	class="border-4 border-red-500 relative h-full max-h-36 w-full flex"
+	class="relative flex w-full h-full border-4 border-red-500 max-h-48"
 	>
 
 		<swiper
-	class="z-10 w-10 h-10"
+	class="z-10 flex w-full h-full max-h-full border-4 border-green-500"
 	@swiper="setProductCardImageSlider"
 	:slidesPerView="1"
-	pagination="true"
+	pagination
 	>
-		<swiper-slide>
-			swiper slide item here	
+		<swiper-slide
+		v-for="image in this.product.images"	
+		:key="image.id"
+		@click="this.goToProductPage()"
+		>
+			<img 
+			class="object-contain w-full h-full"
+			:src="this.api_url + image.imgsrc" />	
 		</swiper-slide>
 
-	</swiper>
+		</swiper>
 
-		<img
-		class="w-full max-h-full object-contain"
-		:src="this.api_url + this.product.images[0].imgsrc"
-		/>
 	</div>
 </template>
 
@@ -54,6 +56,9 @@ export default {
 	methods: {
 		setProductCardImageSlider(swiper) {
 			this.card_image_slider = swiper;			
+		},
+		goToProductPage () {
+			this.$router.push('/product/' + this.product.id)
 		},
 	},
 }

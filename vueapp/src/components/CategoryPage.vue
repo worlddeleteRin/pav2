@@ -1,7 +1,7 @@
 <template>
-	<div class="border border-red-500 mx-auto max-w-7xl px-4">
-		<div class="text-xl font-bold md:text-3xl lg:text-4xl">
-			Название категории
+	<div class="px-4 mx-auto border border-red-500 max-w-7xl">
+		<div class="text-xl font-bold uppercase md:text-3xl lg:text-4xl">
+			{{ this.current_category.name }}	
 		</div>
 		cat id is {{ this.category_id }}
 

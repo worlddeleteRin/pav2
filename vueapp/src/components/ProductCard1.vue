@@ -1,12 +1,16 @@
 <template>
-	<div class="w-full max-w-sm mx-auto overflow-hidden shadow-md rounded-md">
+	<div class="flex flex-col w-full max-w-sm mx-auto overflow-hidden shadow-2xl rounded-md">
 
-		<ProductCardImageContainer 
-		:product="product"
-		/>
+
+		<div class="h-52">
+			<ProductCardImageSimple
+			@click="this.goToProductPage()"
+			:imgsrc="this.product.images[0].imgsrc"
+			/>
+		</div>
 
 		
-        <div class="px-5 py-3">
+        <div class="px-5 py-3 border-4 border-black">
 				<router-link v-bind:to="'/product/' + this.product.id"
 				class="text-xs text-gray-700 uppercase md:text-md">
 					{{ product.name }}	
@@ -20,18 +24,23 @@
 </template>
 
 <script>
-import ProductCardImageContainer from '../components/ProductCardImageContainer.vue';
+import ProductCardImageSimple from '../components/ProductCardImageSimple.vue';
 export default {
     name: 'ProductCard1',
 	props: {
 		product: {},
 	},
 	components: {
-		ProductCardImageContainer,
+		ProductCardImageSimple
 	},
 	computed: {
 		api_url () {
 			return this.$store.state.common.api_url;
+		},
+	},
+	methods: {
+		goToProductPage () {
+			this.$router.push('/product/' + this.product.id);
 		},
 	},
 }

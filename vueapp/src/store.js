@@ -53,7 +53,7 @@ const storeEcommerce = {
   getters: {
 	getCategoryById: (state) => (id) => {
 		return state.categories.filter(
-		category => category.id == id);
+		category => category.id == id)[0];
 	},	
 	getProductById: (state) => (id) => {
 		return state.products.filter(
@@ -69,8 +69,8 @@ const storeEcommerce = {
 
 const storeCommon = {
   state: () => ({
-    // api_url: 'http://127.0.0.1:8000',
-	api_url: 'http://192.168.1.111:8000',
+    api_url: 'http://127.0.0.1:8000',
+	//api_url: 'http://192.168.1.111:8000',
 	isGlobalDataLoaded: false,
   }),
   mutations: {
