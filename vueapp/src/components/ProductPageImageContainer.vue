@@ -162,6 +162,7 @@ export default {
 .product_page_images_wrapper {
 }
 .product_page_images {
+	border: 5px solid brown;
 	height: max-content;
 	display: flex;
 	position: relative;
@@ -179,11 +180,12 @@ export default {
   height: 100%;
 }
 .mySwiper2 .swiper-slide {
+	border: 5px solid violet;
 	display: flex;
 	justify-content: center;
 	height: max-content;	
 	margin: auto;
-	border: 4px solid green;
+	border: 4px solid yellow;
 	img {
 	}
 }
